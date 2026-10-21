@@ -154,7 +154,7 @@ export const ImageInspectionPage: React.FC = () => {
                 </div>
               ) : (
                 <div className="space-y-3">
-                  <div className="relative overflow-hidden rounded-lg border border-slate-200 bg-slate-950 flex items-center justify-center max-h-[360px]">
+                  <div className="relative overflow-hidden rounded-lg border border-slate-200 bg-slate-50 flex items-center justify-center max-h-[360px]">
                     <img
                       src={previewUrl}
                       alt="Selected upload"
@@ -163,7 +163,7 @@ export const ImageInspectionPage: React.FC = () => {
                     <div className="absolute top-2 right-2">
                       <button
                         onClick={handleReset}
-                        className="rounded bg-slate-900/90 px-2.5 py-1 text-xs font-medium text-rose-400 hover:bg-rose-950 border border-slate-700 shadow"
+                        className="rounded-md bg-white/90 px-2.5 py-1 text-xs font-medium text-rose-600 hover:bg-rose-50 border border-slate-200 shadow-xs transition-colors"
                       >
                         Remove
                       </button>

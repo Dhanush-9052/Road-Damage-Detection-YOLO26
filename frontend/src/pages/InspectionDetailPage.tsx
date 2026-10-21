@@ -66,8 +66,8 @@ export const InspectionDetailPage: React.FC<InspectionDetailPageProps> = ({
     return (
       <div className="flex min-h-[500px] items-center justify-center">
         <div className="flex flex-col items-center gap-3">
-          <div className="h-8 w-8 animate-spin rounded-full border-2 border-cyan-500 border-t-transparent" />
-          <span className="text-xs font-semibold text-slate-400">Loading Inspection Record...</span>
+          <div className="h-8 w-8 animate-spin rounded-full border-2 border-cyan-600 border-t-transparent" />
+          <span className="text-xs font-medium text-slate-500">Loading Inspection Record...</span>
         </div>
       </div>
     );
@@ -78,13 +78,13 @@ export const InspectionDetailPage: React.FC<InspectionDetailPageProps> = ({
       <div className="p-6">
         <button
           onClick={onBack}
-          className="flex items-center gap-2 text-xs font-bold text-cyan-400 hover:text-cyan-300 mb-4"
+          className="flex items-center gap-2 text-xs font-medium text-cyan-700 hover:text-cyan-800 mb-4"
         >
           <ArrowLeft className="h-4 w-4" /> Back to History
         </button>
-        <div className="rounded-xl border border-rose-900/60 bg-rose-950/40 p-6 text-center text-rose-300">
-          <p className="font-bold">Error loading inspection record:</p>
-          <p className="text-xs mt-1 text-slate-400">{error || 'Record not found'}</p>
+        <div className="rounded-xl border border-rose-200 bg-rose-50 p-6 text-center text-rose-800">
+          <p className="font-semibold">Error loading inspection record:</p>
+          <p className="text-xs mt-1 text-slate-500">{error || 'Record not found'}</p>
         </div>
       </div>
     );
@@ -96,7 +96,7 @@ export const InspectionDetailPage: React.FC<InspectionDetailPageProps> = ({
       <div className="flex flex-wrap items-center justify-between gap-4">
         <button
           onClick={onBack}
-          className="flex items-center gap-2 text-xs font-bold text-cyan-400 hover:text-cyan-300 transition-colors"
+          className="flex items-center gap-1.5 text-xs font-medium text-cyan-700 hover:text-cyan-800 transition-colors"
         >
           <ArrowLeft className="h-4 w-4" /> Back to Inspections List
         </button>
@@ -105,9 +105,9 @@ export const InspectionDetailPage: React.FC<InspectionDetailPageProps> = ({
           <a
             href={inspection.annotated_url}
             download
-            className="flex items-center gap-1.5 rounded-lg bg-slate-800 px-3 py-1.5 text-xs font-semibold text-slate-200 hover:bg-slate-700 border border-slate-700 transition-all"
+            className="flex items-center gap-1.5 rounded-lg border border-slate-300 bg-white px-3 py-1.5 text-xs font-medium text-slate-700 hover:bg-slate-50 transition-colors"
           >
-            <Download className="h-3.5 w-3.5 text-cyan-400" />
+            <Download className="h-3.5 w-3.5 text-cyan-600" />
             <span>Annotated File</span>
           </a>
 
@@ -115,7 +115,7 @@ export const InspectionDetailPage: React.FC<InspectionDetailPageProps> = ({
             href={api.getReportPdfUrl(inspection.id)}
             target="_blank"
             rel="noreferrer"
-            className="flex items-center gap-1.5 rounded-lg bg-cyan-500 px-3.5 py-1.5 text-xs font-bold text-slate-950 hover:bg-cyan-400 shadow-md shadow-cyan-500/20 transition-all"
+            className="flex items-center gap-1.5 rounded-lg bg-cyan-600 px-3.5 py-1.5 text-xs font-medium text-white hover:bg-cyan-500 shadow-xs transition-colors"
           >
             <FileText className="h-3.5 w-3.5" />
             <span>PDF Report</span>
@@ -123,15 +123,15 @@ export const InspectionDetailPage: React.FC<InspectionDetailPageProps> = ({
 
           <a
             href={api.getExportDataUrl(inspection.id, 'csv')}
-            className="flex items-center gap-1.5 rounded-lg bg-slate-800 px-3 py-1.5 text-xs font-semibold text-slate-200 hover:bg-slate-700 border border-slate-700 transition-all"
+            className="flex items-center gap-1.5 rounded-lg border border-slate-300 bg-white px-3 py-1.5 text-xs font-medium text-slate-700 hover:bg-slate-50 transition-colors"
           >
-            <FileSpreadsheet className="h-3.5 w-3.5 text-emerald-400" />
+            <FileSpreadsheet className="h-3.5 w-3.5 text-emerald-600" />
             <span>Export CSV</span>
           </a>
 
           <button
             onClick={() => setShowDeleteModal(true)}
-            className="flex items-center gap-1.5 rounded-lg bg-rose-950/60 px-3 py-1.5 text-xs font-bold text-rose-400 hover:bg-rose-900 border border-rose-800/60 transition-all ml-2"
+            className="flex items-center gap-1.5 rounded-lg border border-rose-200 bg-rose-50 px-3 py-1.5 text-xs font-medium text-rose-700 hover:bg-rose-100 transition-colors ml-2"
           >
             <Trash2 className="h-3.5 w-3.5" />
             <span>Delete</span>
@@ -140,47 +140,47 @@ export const InspectionDetailPage: React.FC<InspectionDetailPageProps> = ({
       </div>
 
       {/* Main Inspection Banner */}
-      <div className="rounded-xl border border-slate-800 bg-slate-900/90 p-5 shadow-xl">
+      <div className="rounded-xl border border-slate-200 bg-white p-5 shadow-xs">
         <div className="flex flex-wrap items-center justify-between gap-4">
           <div>
             <div className="flex items-center gap-2">
-              <span className="text-xs font-bold text-cyan-400 font-mono">
+              <span className="text-xs font-bold text-cyan-700 font-mono">
                 ID: {inspection.id}
               </span>
-              <span className="text-slate-500">•</span>
-              <span className="rounded-full bg-slate-800 px-2 py-0.5 text-[10px] font-bold text-slate-300 uppercase border border-slate-700">
+              <span className="text-slate-300">•</span>
+              <span className="rounded-full bg-slate-100 px-2 py-0.5 text-[10px] font-semibold text-slate-600 uppercase border border-slate-200">
                 {inspection.media_type}
               </span>
             </div>
-            <h2 className="text-xl font-extrabold text-white mt-1">
+            <h2 className="text-xl font-bold text-slate-900 mt-1">
               {inspection.original_filename}
             </h2>
-            <p className="text-xs text-slate-400 mt-0.5">
+            <p className="text-xs text-slate-500 mt-0.5">
               Inspected on {new Date(inspection.created_at).toLocaleString()} • Model: Ultralytics YOLO26s (MRDD 2026)
             </p>
           </div>
 
-          <div className="flex items-center gap-4 border-l border-slate-800 pl-4">
+          <div className="flex items-center gap-4 border-l border-slate-200 pl-4">
             <div>
-              <span className="text-[10px] text-slate-400 uppercase tracking-wider block mb-1">
+              <span className="text-[10px] text-slate-500 uppercase tracking-wider block mb-1">
                 Highest Severity
               </span>
               <SeverityBadge level={inspection.highest_severity} size="sm" />
             </div>
             <div>
-              <span className="text-[10px] text-slate-400 uppercase tracking-wider block">
+              <span className="text-[10px] text-slate-500 uppercase tracking-wider block">
                 Mean Confidence
               </span>
-              <span className="text-lg font-mono font-bold text-cyan-400">
+              <span className="text-lg font-mono font-bold text-cyan-700">
                 {(inspection.avg_confidence * 100).toFixed(1)}%
               </span>
             </div>
             <div>
-              <span className="text-[10px] text-slate-400 uppercase tracking-wider block">
+              <span className="text-[10px] text-slate-500 uppercase tracking-wider block">
                 Latency
               </span>
-              <span className="text-lg font-mono font-bold text-white flex items-center gap-1">
-                <Clock className="h-4 w-4 text-slate-500" />
+              <span className="text-lg font-mono font-bold text-slate-900 flex items-center gap-1">
+                <Clock className="h-4 w-4 text-cyan-600" />
                 {inspection.inference_time_ms}ms
               </span>
             </div>
@@ -197,12 +197,12 @@ export const InspectionDetailPage: React.FC<InspectionDetailPageProps> = ({
         />
       ) : (
         <div className="space-y-6">
-          <div className="rounded-xl border border-slate-800 bg-slate-900 p-4 shadow-xl">
-            <div className="flex items-center justify-between border-b border-slate-800 pb-3 mb-3">
-              <span className="text-xs font-semibold text-slate-200 uppercase tracking-wider">
+          <div className="rounded-xl border border-slate-200 bg-white p-4 shadow-xs">
+            <div className="flex items-center justify-between border-b border-slate-200 pb-3 mb-3">
+              <span className="text-xs font-semibold text-slate-800 uppercase tracking-wider">
                 Annotated Video Stream
               </span>
-              <span className="text-[11px] font-mono text-slate-400">
+              <span className="text-[11px] font-mono text-slate-500">
                 {inspection.width}×{inspection.height} • {inspection.fps ? `${inspection.fps.toFixed(1)} FPS` : '25 FPS'}
               </span>
             </div>
@@ -230,8 +230,8 @@ export const InspectionDetailPage: React.FC<InspectionDetailPageProps> = ({
       <RiskGauge risk={inspection.risk} defectCount={inspection.total_detections} />
 
       {/* Class Counts Summary */}
-      <div className="rounded-xl border border-slate-800 bg-slate-900/90 p-4 shadow-xl">
-        <span className="text-xs font-semibold text-slate-400 uppercase tracking-wider block mb-3">
+      <div className="rounded-xl border border-slate-200 bg-white p-4 shadow-xs">
+        <span className="text-xs font-semibold text-slate-600 uppercase tracking-wider block mb-3">
           Class Breakdown Summary:
         </span>
         <div className="flex flex-wrap gap-2.5">
@@ -240,13 +240,13 @@ export const InspectionDetailPage: React.FC<InspectionDetailPageProps> = ({
               key={cls}
               className={`flex items-center gap-2 rounded-lg border px-3 py-1.5 text-xs font-semibold ${
                 cnt > 0
-                  ? 'border-cyan-800/60 bg-cyan-950/40 text-cyan-300'
-                  : 'border-slate-800 bg-slate-950/40 text-slate-500'
+                  ? 'border-cyan-200 bg-cyan-50 text-cyan-800'
+                  : 'border-slate-200 bg-slate-50 text-slate-400'
               }`}
             >
               <Layers className="h-3.5 w-3.5" />
               <span>{cls}:</span>
-              <span className="font-mono font-bold text-white">{cnt}</span>
+              <span className="font-mono font-bold text-slate-900">{cnt}</span>
             </div>
           ))}
         </div>
@@ -259,27 +259,27 @@ export const InspectionDetailPage: React.FC<InspectionDetailPageProps> = ({
 
       {/* Delete Confirmation Modal */}
       {showDeleteModal && (
-        <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/80 backdrop-blur-xs p-4">
-          <div className="w-full max-w-md rounded-2xl border border-slate-800 bg-slate-900 p-6 shadow-2xl space-y-4">
-            <div className="flex items-center gap-3 text-rose-400">
+        <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/50 backdrop-blur-xs p-4">
+          <div className="w-full max-w-md rounded-2xl border border-slate-200 bg-white p-6 shadow-2xl space-y-4">
+            <div className="flex items-center gap-3 text-rose-600">
               <AlertTriangle className="h-6 w-6" />
-              <h3 className="text-lg font-bold text-white">Delete Inspection Record?</h3>
+              <h3 className="text-lg font-bold text-slate-900">Delete Inspection Record?</h3>
             </div>
-            <p className="text-xs text-slate-300 leading-relaxed">
+            <p className="text-xs text-slate-600 leading-relaxed">
               This will permanently delete this inspection record and all associated annotated media files and telemetry reports from persistent storage.
             </p>
             <div className="flex justify-end gap-3 pt-2">
               <button
                 disabled={deleting}
                 onClick={() => setShowDeleteModal(false)}
-                className="rounded-xl border border-slate-700 bg-slate-800 px-4 py-2 text-xs font-semibold text-slate-300 hover:bg-slate-700 transition-all"
+                className="rounded-lg border border-slate-300 bg-white px-4 py-2 text-xs font-medium text-slate-700 hover:bg-slate-50 transition-colors"
               >
                 Cancel
               </button>
               <button
                 disabled={deleting}
                 onClick={handleDelete}
-                className="rounded-xl bg-rose-600 px-4 py-2 text-xs font-bold text-white hover:bg-rose-500 transition-all shadow-md shadow-rose-600/30"
+                className="rounded-lg bg-rose-600 px-4 py-2 text-xs font-medium text-white hover:bg-rose-500 shadow-xs transition-colors"
               >
                 {deleting ? 'Deleting...' : 'Confirm Delete'}
               </button>

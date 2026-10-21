@@ -61,8 +61,8 @@ export const AnalyticsPage: React.FC<AnalyticsPageProps> = ({
     return (
       <div className="flex min-h-[500px] items-center justify-center">
         <div className="flex flex-col items-center gap-3">
-          <div className="h-8 w-8 animate-spin rounded-full border-2 border-cyan-500 border-t-transparent" />
-          <span className="text-xs font-semibold text-slate-400">Aggregating Municipal Analytics...</span>
+          <div className="h-8 w-8 animate-spin rounded-full border-2 border-cyan-600 border-t-transparent" />
+          <span className="text-xs font-medium text-slate-500">Aggregating Municipal Analytics...</span>
         </div>
       </div>
     );
@@ -77,32 +77,32 @@ export const AnalyticsPage: React.FC<AnalyticsPageProps> = ({
     : [];
 
   const mediaTypeData = [
-    { name: 'Images', value: summary?.image_inspections || 0, color: '#06b6d4' },
-    { name: 'Videos', value: summary?.video_inspections || 0, color: '#a855f7' },
+    { name: 'Images', value: summary?.image_inspections || 0, color: '#0891b2' },
+    { name: 'Videos', value: summary?.video_inspections || 0, color: '#9333ea' },
   ].filter((d) => d.value > 0);
 
   const riskBandData = [
-    { name: 'Safe (≤30)', value: summary?.risk_distribution?.['Low'] || 0, color: '#10b981' },
-    { name: 'Caution (31-70)', value: summary?.risk_distribution?.['Medium'] || 0, color: '#f59e0b' },
-    { name: 'Danger (>70)', value: summary?.risk_distribution?.['High'] || 0, color: '#ef4444' },
+    { name: 'Safe (≤30)', value: summary?.risk_distribution?.['Low'] || 0, color: '#059669' },
+    { name: 'Caution (31-70)', value: summary?.risk_distribution?.['Medium'] || 0, color: '#d97706' },
+    { name: 'Danger (>70)', value: summary?.risk_distribution?.['High'] || 0, color: '#dc2626' },
   ].filter((d) => d.value > 0);
 
   return (
     <div className="space-y-6 p-6">
       {/* Top Banner */}
-      <div className="rounded-xl border border-slate-800 bg-slate-900 p-4">
+      <div className="rounded-xl border border-slate-200 bg-white p-4 shadow-xs">
         <div className="flex flex-wrap items-center justify-between gap-4">
           <div>
-            <h2 className="text-sm font-semibold text-white">
+            <h2 className="text-sm font-semibold text-slate-800">
               Inspection Analytics & Distribution Trends
             </h2>
-            <p className="text-xs text-slate-400 mt-0.5">
+            <p className="text-xs text-slate-500 mt-0.5">
               Aggregate statistics compiled from completed road inspections
             </p>
           </div>
 
           <div className="flex items-center gap-2">
-            <span className="rounded bg-slate-800 px-2.5 py-1 text-xs text-slate-300 border border-slate-700 font-mono">
+            <span className="rounded bg-slate-50 px-2.5 py-1 text-xs text-slate-600 border border-slate-200 font-mono">
               Total Records: {summary?.total_inspections || 0}
             </span>
           </div>
@@ -110,7 +110,7 @@ export const AnalyticsPage: React.FC<AnalyticsPageProps> = ({
       </div>
 
       {error && (
-        <div className="rounded-xl border border-rose-900/50 bg-rose-950/30 p-4 text-xs text-rose-300">
+        <div className="rounded-lg border border-rose-200 bg-rose-50 p-3 text-xs text-rose-800">
           ⚠️ {error}
         </div>
       )}
@@ -148,8 +148,8 @@ export const AnalyticsPage: React.FC<AnalyticsPageProps> = ({
       </div>
 
       {!hasData ? (
-        <div className="rounded-2xl border border-dashed border-slate-800 bg-slate-900/40 p-12 text-center">
-          <p className="text-sm font-bold text-slate-300 mb-1">
+        <div className="rounded-2xl border border-dashed border-slate-300 bg-white p-12 text-center shadow-xs">
+          <p className="text-sm font-semibold text-slate-800 mb-1">
             No Analytics Available Yet
           </p>
           <p className="text-xs text-slate-500 max-w-sm mx-auto mb-4">
@@ -157,7 +157,7 @@ export const AnalyticsPage: React.FC<AnalyticsPageProps> = ({
           </p>
           <button
             onClick={() => onNavigate('image-inspect')}
-            className="rounded-xl bg-cyan-500 px-4 py-2 text-xs font-bold text-slate-950 hover:bg-cyan-400 transition-all shadow-md shadow-cyan-500/20"
+            className="rounded-lg bg-cyan-600 px-4 py-2 text-xs font-medium text-white hover:bg-cyan-500 transition-colors shadow-xs"
           >
             Start First Inspection
           </button>
@@ -167,11 +167,11 @@ export const AnalyticsPage: React.FC<AnalyticsPageProps> = ({
           {/* Charts Row */}
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
             {/* Defect Class Breakdown */}
-            <div className="rounded-xl border border-slate-800 bg-slate-900/90 p-5 shadow-xl">
-              <span className="text-xs font-semibold text-slate-400 uppercase tracking-wider block mb-1">
+            <div className="rounded-xl border border-slate-200 bg-white p-5 shadow-xs">
+              <span className="text-xs font-semibold text-slate-500 uppercase tracking-wider block mb-1">
                 Class Frequency
               </span>
-              <h4 className="text-sm font-bold text-white mb-4">
+              <h4 className="text-sm font-semibold text-slate-800 mb-4">
                 Total Instances per Defect Class
               </h4>
 
@@ -182,25 +182,26 @@ export const AnalyticsPage: React.FC<AnalyticsPageProps> = ({
                     <YAxis dataKey="name" type="category" stroke="#64748b" fontSize={11} width={80} />
                     <Tooltip
                       contentStyle={{
-                        backgroundColor: '#0f172a',
-                        borderColor: '#334155',
+                        backgroundColor: '#ffffff',
+                        borderColor: '#cbd5e1',
                         borderRadius: '8px',
                         fontSize: '12px',
-                        color: '#f8fafc',
+                        color: '#0f172a',
+                        boxShadow: '0 4px 6px -1px rgb(0 0 0 / 0.1)',
                       }}
                     />
-                    <Bar dataKey="count" fill="#06b6d4" radius={[0, 6, 6, 0]} />
+                    <Bar dataKey="count" fill="#0891b2" radius={[0, 4, 4, 0]} />
                   </BarChart>
                 </ResponsiveContainer>
               </div>
             </div>
 
             {/* Risk Category Distribution */}
-            <div className="rounded-xl border border-slate-800 bg-slate-900/90 p-5 shadow-xl">
-              <span className="text-xs font-semibold text-slate-400 uppercase tracking-wider block mb-1">
+            <div className="rounded-xl border border-slate-200 bg-white p-5 shadow-xs">
+              <span className="text-xs font-semibold text-slate-500 uppercase tracking-wider block mb-1">
                 Risk Distribution
               </span>
-              <h4 className="text-sm font-bold text-white mb-4">
+              <h4 className="text-sm font-semibold text-slate-800 mb-4">
                 Inspections by Pavement Risk Level
               </h4>
 
@@ -222,23 +223,24 @@ export const AnalyticsPage: React.FC<AnalyticsPageProps> = ({
                     </Pie>
                     <Tooltip
                       contentStyle={{
-                        backgroundColor: '#0f172a',
-                        borderColor: '#334155',
+                        backgroundColor: '#ffffff',
+                        borderColor: '#cbd5e1',
                         borderRadius: '8px',
                         fontSize: '12px',
-                        color: '#f8fafc',
+                        color: '#0f172a',
+                        boxShadow: '0 4px 6px -1px rgb(0 0 0 / 0.1)',
                       }}
                     />
                   </PieChart>
                 </ResponsiveContainer>
               </div>
 
-              <div className="flex justify-around border-t border-slate-800 pt-3 text-xs">
+              <div className="flex justify-around border-t border-slate-200 pt-3 text-xs">
                 {riskBandData.map((r) => (
                   <div key={r.name} className="flex items-center gap-1.5">
                     <span className="h-2.5 w-2.5 rounded-full" style={{ backgroundColor: r.color }} />
-                    <span className="text-slate-300">{r.name}:</span>
-                    <span className="font-mono font-bold text-white">{r.value}</span>
+                    <span className="text-slate-600">{r.name}:</span>
+                    <span className="font-mono font-bold text-slate-900">{r.value}</span>
                   </div>
                 ))}
               </div>
@@ -248,78 +250,78 @@ export const AnalyticsPage: React.FC<AnalyticsPageProps> = ({
           {/* Media Modality Breakdown */}
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
             {mediaTypeData.map((m) => (
-              <div key={m.name} className="flex items-center justify-between rounded-xl border border-slate-800 bg-slate-900/90 p-4">
+              <div key={m.name} className="flex items-center justify-between rounded-xl border border-slate-200 bg-white p-4 shadow-xs">
                 <div className="flex items-center gap-3">
-                  <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-slate-800 text-cyan-400 border border-slate-700">
+                  <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-slate-50 text-cyan-600 border border-slate-200">
                     <Layers className="h-5 w-5" />
                   </div>
                   <div>
-                    <span className="text-xs font-bold text-white block">{m.name} Processed</span>
-                    <span className="text-[11px] text-slate-400">Total verified inspections</span>
+                    <span className="text-xs font-semibold text-slate-800 block">{m.name} Processed</span>
+                    <span className="text-[11px] text-slate-500">Total verified inspections</span>
                   </div>
                 </div>
-                <span className="text-2xl font-black font-mono text-cyan-300">{m.value}</span>
+                <span className="text-2xl font-bold font-mono text-cyan-700">{m.value}</span>
               </div>
             ))}
           </div>
 
           {/* High-Risk Priority Incidents Table */}
-          <div className="rounded-xl border border-slate-800 bg-slate-900/90 shadow-xl overflow-hidden">
-            <div className="flex items-center justify-between border-b border-slate-800 bg-slate-950/60 p-4">
+          <div className="rounded-xl border border-slate-200 bg-white shadow-xs overflow-hidden">
+            <div className="flex items-center justify-between border-b border-slate-200 bg-slate-50 px-4 py-3">
               <div className="flex items-center gap-2">
-                <ShieldAlert className="h-4 w-4 text-rose-400" />
-                <h4 className="text-sm font-bold text-white uppercase tracking-wider">
+                <ShieldAlert className="h-4 w-4 text-rose-600" />
+                <h4 className="text-xs font-semibold text-slate-800 uppercase tracking-wider">
                   Critical Hazard Inspections (High Severity)
                 </h4>
               </div>
-              <span className="text-xs font-mono text-rose-400 font-bold">
+              <span className="text-xs font-mono text-rose-600 font-bold">
                 {highRiskItems.length} Incidents
               </span>
             </div>
 
             {highRiskItems.length === 0 ? (
-              <div className="p-8 text-center text-xs text-slate-500">
+              <div className="p-8 text-center text-xs text-slate-400">
                 No high-severity inspections logged yet.
               </div>
             ) : (
               <div className="overflow-x-auto">
-                <table className="w-full text-left text-xs text-slate-300">
-                  <thead className="border-b border-slate-800 bg-slate-950/40 text-[11px] font-semibold uppercase tracking-wider text-slate-400">
+                <table className="w-full text-left text-xs text-slate-700">
+                  <thead className="border-b border-slate-200 bg-slate-50/80 text-[11px] font-semibold uppercase tracking-wider text-slate-500">
                     <tr>
-                      <th className="px-4 py-3">Filename</th>
-                      <th className="px-4 py-3">Type</th>
-                      <th className="px-4 py-3">Date</th>
-                      <th className="px-4 py-3">Detections</th>
-                      <th className="px-4 py-3">Severity</th>
-                      <th className="px-4 py-3">Risk Score</th>
-                      <th className="px-4 py-3 text-right">Action</th>
+                      <th className="px-4 py-2.5">Filename</th>
+                      <th className="px-4 py-2.5">Type</th>
+                      <th className="px-4 py-2.5">Date</th>
+                      <th className="px-4 py-2.5">Detections</th>
+                      <th className="px-4 py-2.5">Severity</th>
+                      <th className="px-4 py-2.5">Risk Score</th>
+                      <th className="px-4 py-2.5 text-right">Action</th>
                     </tr>
                   </thead>
-                  <tbody className="divide-y divide-slate-800/60">
+                  <tbody className="divide-y divide-slate-100">
                     {highRiskItems.slice(0, 10).map((item) => (
-                      <tr key={item.id} className="hover:bg-slate-800/40">
-                        <td className="px-4 py-3 font-medium text-white max-w-[200px] truncate">
+                      <tr key={item.id} className="hover:bg-slate-50 transition-colors">
+                        <td className="px-4 py-2.5 font-medium text-slate-900 max-w-[200px] truncate">
                           {item.original_filename || item.filename}
                         </td>
-                        <td className="px-4 py-3 uppercase text-[10px] font-bold text-slate-400">
+                        <td className="px-4 py-2.5 uppercase text-[10px] font-semibold text-slate-500">
                           {item.media_type}
                         </td>
-                        <td className="px-4 py-3 text-slate-400 font-mono text-[11px]">
+                        <td className="px-4 py-2.5 text-slate-500 font-mono text-[11px]">
                           {new Date(item.created_at).toLocaleDateString()}
                         </td>
-                        <td className="px-4 py-3 font-mono font-bold text-white">
+                        <td className="px-4 py-2.5 font-mono font-bold text-slate-900">
                           {item.total_detections}
                         </td>
-                        <td className="px-4 py-3">
+                        <td className="px-4 py-2.5">
                           <SeverityBadge level={item.highest_severity} size="sm" />
                         </td>
-                        <td className="px-4 py-3 font-mono font-bold text-rose-400">
+                        <td className="px-4 py-2.5 font-mono font-bold text-rose-600">
                           {item.risk_score.toFixed(1)} / 100
                         </td>
-                        <td className="px-4 py-3 text-right">
+                        <td className="px-4 py-2.5 text-right">
                           <button
                             onClick={() => onSelectInspection(item.id)}
-                            className="inline-flex items-center gap-1 rounded-lg bg-slate-800 px-2.5 py-1 text-xs font-semibold text-slate-200 hover:bg-cyan-500 hover:text-slate-950 transition-all border border-slate-700"
+                            className="inline-flex items-center gap-1.5 rounded-md bg-white px-2.5 py-1 text-xs font-medium text-slate-700 hover:bg-slate-50 border border-slate-300 shadow-2xs transition-colors"
                           >
                             <Eye className="h-3.5 w-3.5" />
                             <span>Inspect</span>

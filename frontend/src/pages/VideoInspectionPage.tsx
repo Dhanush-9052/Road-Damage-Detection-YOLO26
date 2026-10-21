@@ -137,11 +137,11 @@ export const VideoInspectionPage: React.FC<VideoInspectionPageProps> = ({
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
           {/* Video Upload Dropzone */}
           <div className="lg:col-span-2">
-            <div className="rounded-xl border border-slate-800 bg-slate-900 p-5">
-              <h3 className="text-sm font-semibold text-white mb-1">
+            <div className="rounded-xl border border-slate-200 bg-white p-5 shadow-xs">
+              <h3 className="text-sm font-semibold text-slate-800 mb-1">
                 Road Survey Footage
               </h3>
-              <p className="text-xs text-slate-400 mb-4">
+              <p className="text-xs text-slate-500 mb-4">
                 Select or drop dashcam/drone video. Frames are analyzed for road defects with telemetry overlay.
               </p>
 
@@ -153,8 +153,8 @@ export const VideoInspectionPage: React.FC<VideoInspectionPageProps> = ({
                   onClick={() => fileInputRef.current?.click()}
                   className={`flex flex-col items-center justify-center rounded-xl border-2 border-dashed p-10 text-center cursor-pointer transition-colors ${
                     isDragging
-                      ? 'border-cyan-500 bg-slate-800'
-                      : 'border-slate-700 bg-slate-950/60 hover:border-slate-500 hover:bg-slate-900'
+                      ? 'border-cyan-500 bg-cyan-50/50'
+                      : 'border-slate-300 bg-slate-50/60 hover:border-slate-400 hover:bg-slate-100/50'
                   }`}
                 >
                   <input
@@ -164,22 +164,22 @@ export const VideoInspectionPage: React.FC<VideoInspectionPageProps> = ({
                     className="hidden"
                     onChange={(e) => e.target.files && e.target.files[0] && handleFileSelect(e.target.files[0])}
                   />
-                  <div className="mb-3 flex h-12 w-12 items-center justify-center rounded-xl bg-slate-800 text-cyan-400 border border-slate-700">
+                  <div className="mb-3 flex h-12 w-12 items-center justify-center rounded-xl bg-slate-100 text-cyan-600 border border-slate-200">
                     <VideoIcon className="h-6 w-6" />
                   </div>
-                  <h4 className="text-xs font-semibold text-white mb-1">
+                  <h4 className="text-xs font-semibold text-slate-800 mb-1">
                     Select inspection video file
                   </h4>
                   <p className="text-xs text-slate-400 mb-3">
                     Drag and drop or browse files
                   </p>
-                  <span className="rounded bg-slate-800 px-2.5 py-1 text-[11px] font-mono text-slate-300 border border-slate-700">
+                  <span className="rounded bg-slate-100 px-2.5 py-1 text-[11px] font-mono text-slate-600 border border-slate-200">
                     MP4, AVI, MOV, MKV, WEBM (Max 250MB)
                   </span>
                 </div>
               ) : (
                 <div className="space-y-3">
-                  <div className="relative overflow-hidden rounded-lg border border-slate-800 bg-black max-h-[360px] flex items-center justify-center">
+                  <div className="relative overflow-hidden rounded-lg border border-slate-200 bg-black max-h-[360px] flex items-center justify-center">
                     <video
                       src={videoPreviewUrl}
                       controls
@@ -189,18 +189,18 @@ export const VideoInspectionPage: React.FC<VideoInspectionPageProps> = ({
                     <div className="absolute top-2 right-2">
                       <button
                         onClick={handleReset}
-                        className="rounded bg-slate-900/90 px-2.5 py-1 text-xs font-medium text-rose-400 hover:bg-rose-950 border border-slate-700 shadow"
+                        className="rounded-md bg-white/90 px-2.5 py-1 text-xs font-medium text-rose-600 hover:bg-rose-50 border border-slate-200 shadow-xs transition-colors"
                       >
                         Remove
                       </button>
                     </div>
                   </div>
 
-                  <div className="flex items-center justify-between rounded-lg bg-slate-950 p-3 border border-slate-800">
+                  <div className="flex items-center justify-between rounded-lg bg-slate-50 p-3 border border-slate-200">
                     <div className="flex items-center gap-2.5">
-                      <Film className="h-4 w-4 text-cyan-400" />
+                      <Film className="h-4 w-4 text-cyan-600" />
                       <div>
-                        <span className="text-xs font-medium text-white block">
+                        <span className="text-xs font-medium text-slate-800 block">
                           {selectedFile?.name}
                         </span>
                         <span className="text-[11px] text-slate-400 font-mono">
@@ -208,7 +208,7 @@ export const VideoInspectionPage: React.FC<VideoInspectionPageProps> = ({
                         </span>
                       </div>
                     </div>
-                    <span className="text-xs text-cyan-400 font-medium">
+                    <span className="text-xs text-emerald-700 font-medium">
                       Ready to Process
                     </span>
                   </div>
@@ -217,26 +217,26 @@ export const VideoInspectionPage: React.FC<VideoInspectionPageProps> = ({
 
               {/* Job Progress Indicator */}
               {jobStatus && (
-                <div className="mt-4 rounded-lg border border-slate-700 bg-slate-950 p-4 space-y-2.5">
+                <div className="mt-4 rounded-lg border border-slate-200 bg-slate-50 p-4 space-y-2.5">
                   <div className="flex items-center justify-between text-xs">
-                    <span className="text-slate-200 font-medium flex items-center gap-2">
-                      <div className="h-3 w-3 animate-spin rounded-full border-2 border-cyan-400 border-t-transparent" />
-                      Processing: {jobStatus.status.toUpperCase()}
+                    <span className="text-slate-800 font-medium flex items-center gap-2">
+                      <div className="h-3 w-3 animate-spin rounded-full border-2 border-cyan-600 border-t-transparent" />
+                      Processing: {jobStatus.status.toUpperCase()} {jobId ? `(${jobId.slice(0, 8)})` : ''}
                     </span>
-                    <span className="font-mono text-cyan-400 font-bold">
+                    <span className="font-mono text-cyan-700 font-bold">
                       {jobStatus.progress.toFixed(1)}%
                     </span>
                   </div>
 
                   {/* Progress Bar */}
-                  <div className="h-2 w-full rounded-full bg-slate-800 overflow-hidden">
+                  <div className="h-2 w-full rounded-full bg-slate-200 overflow-hidden">
                     <div
-                      className="h-full rounded-full bg-cyan-500 transition-all duration-300 ease-out"
+                      className="h-full rounded-full bg-cyan-600 transition-all duration-300 ease-out"
                       style={{ width: `${Math.max(3, jobStatus.progress)}%` }}
                     />
                   </div>
 
-                  <div className="flex justify-between text-[11px] text-slate-400 font-mono">
+                  <div className="flex justify-between text-[11px] text-slate-500 font-mono">
                     <span>
                       Frame: {jobStatus.current_frame} / {jobStatus.total_frames || '...'}
                     </span>
@@ -246,7 +246,7 @@ export const VideoInspectionPage: React.FC<VideoInspectionPageProps> = ({
               )}
 
               {error && (
-                <div className="mt-4 flex items-center gap-2 rounded-lg border border-rose-900/60 bg-rose-950/40 p-3 text-xs text-rose-300">
+                <div className="mt-4 flex items-center gap-2 rounded-lg border border-rose-200 bg-rose-50 p-3 text-xs text-rose-800">
                   <AlertCircle className="h-4 w-4 shrink-0" />
                   <span>{error}</span>
                 </div>
@@ -256,10 +256,10 @@ export const VideoInspectionPage: React.FC<VideoInspectionPageProps> = ({
 
           {/* Video Parameters Column */}
           <div>
-            <div className="rounded-xl border border-slate-800 bg-slate-900 p-5 space-y-5">
-              <div className="flex items-center gap-2 border-b border-slate-800 pb-3">
-                <Sliders className="h-4 w-4 text-cyan-400" />
-                <h4 className="text-xs font-semibold text-white uppercase tracking-wider">
+            <div className="rounded-xl border border-slate-200 bg-white p-5 shadow-xs space-y-5">
+              <div className="flex items-center gap-2 border-b border-slate-200 pb-3">
+                <Sliders className="h-4 w-4 text-cyan-600" />
+                <h4 className="text-xs font-semibold text-slate-800 uppercase tracking-wider">
                   Detection Parameters
                 </h4>
               </div>
@@ -267,8 +267,8 @@ export const VideoInspectionPage: React.FC<VideoInspectionPageProps> = ({
               {/* Confidence Threshold */}
               <div className="space-y-1.5">
                 <div className="flex justify-between text-xs">
-                  <span className="text-slate-300">Confidence Threshold</span>
-                  <span className="font-mono text-cyan-400 font-bold">
+                  <span className="text-slate-700">Confidence Threshold</span>
+                  <span className="font-mono text-cyan-700 font-bold">
                     {(confThreshold * 100).toFixed(0)}%
                   </span>
                 </div>
@@ -279,7 +279,7 @@ export const VideoInspectionPage: React.FC<VideoInspectionPageProps> = ({
                   step="0.05"
                   value={confThreshold}
                   onChange={(e) => setConfThreshold(parseFloat(e.target.value))}
-                  className="w-full accent-cyan-500 cursor-pointer"
+                  className="w-full accent-cyan-600 cursor-pointer"
                 />
                 <p className="text-[11px] text-slate-500">
                   Minimum confidence for defect bounding boxes.
@@ -289,8 +289,8 @@ export const VideoInspectionPage: React.FC<VideoInspectionPageProps> = ({
               {/* Frame Sampling Step */}
               <div className="space-y-1.5">
                 <div className="flex justify-between text-xs">
-                  <span className="text-slate-300">Frame Sampling</span>
-                  <span className="font-mono text-cyan-400 font-bold">
+                  <span className="text-slate-700">Frame Sampling</span>
+                  <span className="font-mono text-cyan-700 font-bold">
                     {samplingStep === 1 ? 'Every Frame (1x)' : `Every ${samplingStep} frames (${samplingStep}x)`}
                   </span>
                 </div>
@@ -301,8 +301,8 @@ export const VideoInspectionPage: React.FC<VideoInspectionPageProps> = ({
                       onClick={() => setSamplingStep(step)}
                       className={`rounded py-1 text-xs font-mono font-medium transition-colors border ${
                         samplingStep === step
-                          ? 'bg-cyan-600 text-white border-cyan-500'
-                          : 'bg-slate-800 text-slate-400 border-slate-700 hover:text-white'
+                          ? 'bg-cyan-600 text-white border-cyan-600'
+                          : 'bg-white text-slate-700 border-slate-300 hover:bg-slate-50'
                       }`}
                     >
                       {step}x
@@ -317,8 +317,8 @@ export const VideoInspectionPage: React.FC<VideoInspectionPageProps> = ({
               {/* EMA Smoothing Alpha */}
               <div className="space-y-1.5">
                 <div className="flex justify-between text-xs">
-                  <span className="text-slate-300">Telemetry Smoothing (α)</span>
-                  <span className="font-mono text-cyan-400 font-bold">
+                  <span className="text-slate-700">Telemetry Smoothing (α)</span>
+                  <span className="font-mono text-cyan-700 font-bold">
                     {emaAlpha.toFixed(2)}
                   </span>
                 </div>
@@ -329,7 +329,7 @@ export const VideoInspectionPage: React.FC<VideoInspectionPageProps> = ({
                   step="0.05"
                   value={emaAlpha}
                   onChange={(e) => setEmaAlpha(parseFloat(e.target.value))}
-                  className="w-full accent-cyan-500 cursor-pointer"
+                  className="w-full accent-cyan-600 cursor-pointer"
                 />
                 <p className="text-[11px] text-slate-500">
                   Exponential moving average filter for video risk score.
@@ -342,8 +342,8 @@ export const VideoInspectionPage: React.FC<VideoInspectionPageProps> = ({
                 onClick={startVideoAnalysis}
                 className={`w-full flex items-center justify-center gap-2 rounded-lg py-2.5 text-xs font-semibold transition-colors ${
                   !selectedFile || (jobStatus !== null && jobStatus.status === 'processing')
-                    ? 'bg-slate-800 text-slate-500 cursor-not-allowed border border-slate-700'
-                    : 'bg-cyan-600 text-white hover:bg-cyan-500'
+                    ? 'bg-slate-100 text-slate-400 cursor-not-allowed border border-slate-200'
+                    : 'bg-cyan-600 text-white hover:bg-cyan-500 shadow-xs'
                 }`}
               >
                 <Play className="h-3.5 w-3.5 fill-white" />
@@ -356,18 +356,18 @@ export const VideoInspectionPage: React.FC<VideoInspectionPageProps> = ({
         /* Results View */
         <div className="space-y-6">
           {/* Top Banner */}
-          <div className="flex flex-wrap items-center justify-between gap-3 rounded-xl border border-slate-800 bg-slate-900 p-4">
+          <div className="flex flex-wrap items-center justify-between gap-3 rounded-xl border border-slate-200 bg-white p-4 shadow-xs">
             <div>
               <div className="flex items-center gap-2">
-                <span className="text-xs font-semibold text-cyan-400">
+                <span className="text-xs font-semibold text-cyan-700">
                   Video Inspection Completed
                 </span>
-                <span className="text-slate-600">•</span>
-                <span className="text-xs text-slate-200 font-medium">
+                <span className="text-slate-300">•</span>
+                <span className="text-xs text-slate-800 font-medium">
                   {result.original_filename}
                 </span>
               </div>
-              <span className="text-xs text-slate-400">
+              <span className="text-xs text-slate-500">
                 Duration: {result.duration_sec?.toFixed(1)}s • Analyzed: {result.frames_processed} frames • Risk: {result.risk.score.toFixed(1)}/100
               </span>
             </div>
@@ -376,7 +376,7 @@ export const VideoInspectionPage: React.FC<VideoInspectionPageProps> = ({
               <a
                 href={result.annotated_url}
                 download={`RoadVision_${result.id.slice(0, 8)}_annotated.mp4`}
-                className="flex items-center gap-1.5 rounded-lg bg-cyan-600 px-3 py-1.5 text-xs font-medium text-white hover:bg-cyan-500 transition-colors"
+                className="flex items-center gap-1.5 rounded-lg bg-cyan-600 px-3 py-1.5 text-xs font-medium text-white hover:bg-cyan-500 transition-colors shadow-xs"
               >
                 <Download className="h-3.5 w-3.5" />
                 <span>Download Video</span>
@@ -386,23 +386,23 @@ export const VideoInspectionPage: React.FC<VideoInspectionPageProps> = ({
                 <a
                   href={result.telemetry_csv_url}
                   download={`RoadVision_${result.id.slice(0, 8)}_telemetry.csv`}
-                  className="flex items-center gap-1.5 rounded-lg border border-slate-700 bg-slate-800 px-3 py-1.5 text-xs font-medium text-slate-300 hover:bg-slate-700 transition-colors"
+                  className="flex items-center gap-1.5 rounded-lg border border-slate-300 bg-white px-3 py-1.5 text-xs font-medium text-slate-700 hover:bg-slate-50 transition-colors"
                 >
-                  <FileSpreadsheet className="h-3.5 w-3.5 text-emerald-400" />
+                  <FileSpreadsheet className="h-3.5 w-3.5 text-emerald-600" />
                   <span>Telemetry CSV</span>
                 </a>
               )}
 
               <button
                 onClick={() => onSelectInspection(result.id)}
-                className="flex items-center gap-1.5 rounded-lg border border-slate-700 bg-slate-800 px-3 py-1.5 text-xs font-medium text-slate-300 hover:bg-slate-700 transition-colors"
+                className="flex items-center gap-1.5 rounded-lg border border-slate-300 bg-white px-3 py-1.5 text-xs font-medium text-slate-700 hover:bg-slate-50 transition-colors"
               >
                 <span>Audit Details</span>
               </button>
 
               <button
                 onClick={handleReset}
-                className="flex items-center gap-1.5 rounded-lg border border-slate-700 bg-slate-800 px-3 py-1.5 text-xs font-medium text-slate-300 hover:bg-slate-700 hover:text-white transition-colors"
+                className="flex items-center gap-1.5 rounded-lg border border-slate-300 bg-white px-3 py-1.5 text-xs font-medium text-slate-700 hover:bg-slate-50 hover:text-slate-900 transition-colors"
               >
                 <RotateCcw className="h-3.5 w-3.5" />
                 <span>Inspect Another</span>
@@ -412,30 +412,30 @@ export const VideoInspectionPage: React.FC<VideoInspectionPageProps> = ({
 
           {/* Quick Metrics */}
           <div className="grid grid-cols-2 sm:grid-cols-4 gap-4">
-            <div className="rounded-xl border border-slate-800 bg-slate-900 p-4">
-              <span className="text-xs font-medium text-slate-400 block">
+            <div className="rounded-xl border border-slate-200 bg-white p-4 shadow-xs">
+              <span className="text-xs font-medium text-slate-500 block">
                 Total Detections
               </span>
-              <span className="text-2xl font-bold text-white mt-1 block">
+              <span className="text-2xl font-bold text-slate-900 mt-1 block">
                 {result.total_detections}
               </span>
-              <span className="text-[11px] text-slate-500">{result.frames_processed} frames analyzed</span>
+              <span className="text-[11px] text-slate-400">{result.frames_processed} frames analyzed</span>
             </div>
 
-            <div className="rounded-xl border border-slate-800 bg-slate-900 p-4">
-              <span className="text-xs font-medium text-slate-400 block">
+            <div className="rounded-xl border border-slate-200 bg-white p-4 shadow-xs">
+              <span className="text-xs font-medium text-slate-500 block">
                 Peak Road Risk
               </span>
               <span className={`text-2xl font-bold mt-1 block ${
-                result.risk.score > 70 ? 'text-rose-400' : result.risk.score > 30 ? 'text-amber-400' : 'text-emerald-400'
+                result.risk.score > 70 ? 'text-rose-600' : result.risk.score > 30 ? 'text-amber-600' : 'text-emerald-600'
               }`}>
                 {result.risk.score.toFixed(1)} / 100
               </span>
               <span className="text-[11px] text-slate-500">{result.risk.level}</span>
             </div>
 
-            <div className="rounded-xl border border-slate-800 bg-slate-900 p-4">
-              <span className="text-xs font-medium text-slate-400 block">
+            <div className="rounded-xl border border-slate-200 bg-white p-4 shadow-xs">
+              <span className="text-xs font-medium text-slate-500 block">
                 Highest Severity
               </span>
               <div className="mt-2">
@@ -443,28 +443,28 @@ export const VideoInspectionPage: React.FC<VideoInspectionPageProps> = ({
               </div>
             </div>
 
-            <div className="rounded-xl border border-slate-800 bg-slate-900 p-4">
-              <span className="text-xs font-medium text-slate-400 block">
+            <div className="rounded-xl border border-slate-200 bg-white p-4 shadow-xs">
+              <span className="text-xs font-medium text-slate-500 block">
                 Processing Speed
               </span>
-              <span className="text-2xl font-bold text-cyan-400 mt-1 block font-mono flex items-center gap-1">
-                <Gauge className="h-4 w-4 text-cyan-500" />
+              <span className="text-2xl font-bold text-cyan-700 mt-1 block font-mono flex items-center gap-1">
+                <Gauge className="h-4 w-4 text-cyan-600" />
                 {result.fps ? `${result.fps.toFixed(1)} FPS` : 'N/A'}
               </span>
-              <span className="text-[11px] text-slate-500">Telemetry render rate</span>
+              <span className="text-[11px] text-slate-400">Telemetry render rate</span>
             </div>
           </div>
 
           {/* Video Player Display - Plays directly in page */}
-          <div className="rounded-xl border border-slate-800 bg-slate-900 p-4 shadow-xl">
-            <div className="flex items-center justify-between border-b border-slate-800 pb-3 mb-3">
+          <div className="rounded-xl border border-slate-200 bg-white p-4 shadow-xs">
+            <div className="flex items-center justify-between border-b border-slate-200 pb-3 mb-3">
               <div className="flex items-center gap-2">
-                <Film className="h-4 w-4 text-cyan-400" />
-                <h4 className="text-xs font-semibold text-slate-200 uppercase tracking-wider">
+                <Film className="h-4 w-4 text-cyan-600" />
+                <h4 className="text-xs font-semibold text-slate-800 uppercase tracking-wider">
                   Annotated Video Stream
                 </h4>
               </div>
-              <span className="text-[11px] font-mono text-slate-400">
+              <span className="text-[11px] font-mono text-slate-500">
                 {result.width}×{result.height} • {result.fps ? `${result.fps.toFixed(1)} FPS` : '25 FPS'} • H.264
               </span>
             </div>

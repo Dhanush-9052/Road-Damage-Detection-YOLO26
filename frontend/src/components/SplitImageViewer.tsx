@@ -105,14 +105,14 @@ export const SplitImageViewer: React.FC<SplitImageViewerProps> = ({
       </div>
 
       {/* Main Image View Canvas Area */}
-      <div className="relative overflow-auto bg-slate-950 p-4 flex items-center justify-center min-h-[420px] max-h-[640px]">
+      <div className="relative overflow-auto bg-slate-100 p-4 flex items-center justify-center min-h-[420px] max-h-[640px]">
         {viewMode === 'split' ? (
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4 w-full">
             <div className="space-y-2">
-              <span className="text-xs font-semibold text-slate-400 uppercase tracking-wider block">
+              <span className="text-xs font-semibold text-slate-600 uppercase tracking-wider block">
                 Raw Input Photo
               </span>
-              <div className="overflow-hidden rounded-lg border border-slate-800 bg-black/60 flex items-center justify-center">
+              <div className="overflow-hidden rounded-lg border border-slate-200 bg-white shadow-xs flex items-center justify-center">
                 <img
                   src={originalUrl}
                   alt="Original"
@@ -122,10 +122,10 @@ export const SplitImageViewer: React.FC<SplitImageViewerProps> = ({
               </div>
             </div>
             <div className="space-y-2">
-              <span className="text-xs font-semibold text-cyan-400 uppercase tracking-wider block">
+              <span className="text-xs font-semibold text-cyan-700 uppercase tracking-wider block">
                 YOLO26 Annotated Detection Map
               </span>
-              <div className="overflow-hidden rounded-lg border border-cyan-800/40 bg-black/60 flex items-center justify-center">
+              <div className="overflow-hidden rounded-lg border border-cyan-300/80 bg-white shadow-xs flex items-center justify-center">
                 <img
                   src={annotatedUrl}
                   alt="Annotated"
@@ -136,7 +136,7 @@ export const SplitImageViewer: React.FC<SplitImageViewerProps> = ({
             </div>
           </div>
         ) : (
-          <div className="overflow-hidden rounded-lg flex items-center justify-center">
+          <div className="overflow-hidden rounded-lg border border-slate-200 bg-white shadow-xs flex items-center justify-center">
             <img
               src={viewMode === 'annotated' ? annotatedUrl : originalUrl}
               alt={filename}
@@ -149,11 +149,11 @@ export const SplitImageViewer: React.FC<SplitImageViewerProps> = ({
 
       {/* Fullscreen Modal View */}
       {isFullscreen && (
-        <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/95 p-6 backdrop-blur-md">
+        <div className="fixed inset-0 z-50 flex items-center justify-center bg-slate-900/80 p-6 backdrop-blur-md">
           <div className="relative max-h-full max-w-full flex flex-col items-center">
             <button
               onClick={() => setIsFullscreen(false)}
-              className="absolute -top-10 right-0 rounded-full bg-slate-800 px-3 py-1 text-xs font-bold text-white hover:bg-slate-700 border border-slate-600"
+              className="absolute -top-10 right-0 rounded-full bg-white px-3 py-1 text-xs font-semibold text-slate-700 hover:bg-slate-100 border border-slate-300 shadow-md"
             >
               ✕ Close Preview
             </button>
